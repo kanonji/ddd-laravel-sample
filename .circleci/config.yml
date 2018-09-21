@@ -19,6 +19,8 @@ jobs:
     steps:
       - checkout
 
+      - run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
       # Download and cache dependencies
       - restore_cache:
           keys:
