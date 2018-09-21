@@ -12,7 +12,11 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mysql:9.4
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: homestead
+        command: [--character-set-server=utf8, --collation-server=utf8_general_ci, --default-storage-engine=innodb]
 
     working_directory: ~/repo
 
@@ -35,5 +39,10 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
         
+      - run:
+        name: Wait for DB
+        # preinstalled in circleci/* docker image
+        command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+
       # run tests!
       - run: ./vendor/bin/phpunit
