@@ -147,3 +147,5 @@ I have used this boilerplate: https://github.com/rappasoft/laravel-5-boilerplate
 ## Links
 
 * http://codebetter.com/gregyoung/2010/02/15/cqrs-is-more-work-because-of-the-read-model/ (by https://github.com/gregoryyoung?)
+
+## Edited
